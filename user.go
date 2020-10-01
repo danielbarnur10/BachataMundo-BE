@@ -7,18 +7,18 @@ import (
 
 // User of Daniel
 type User struct {
-	username string
-	password string
+	Username string
+	Password string
 }
 
 var users = [...]User{
 	User{
-		username: "nitzan",
-		password: "1234",
+		Username: "nitzan",
+		Password: "1234",
 	},
 	User{
-		username: "daniel",
-		password: "12345",
+		Username: "daniel",
+		Password: "12345",
 	},
 }
 
@@ -30,6 +30,7 @@ func getAllUsers(w http.ResponseWriter, r *http.Request) {
 	// 	return
 	// }
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(users)
 	// w.Write(js)
 }
@@ -39,7 +40,7 @@ func getUser(w http.ResponseWriter, r *http.Request) {
 	var foundUsername User
 
 	for i := 0; i < len(users); i++ {
-		if users[i].username == username {
+		if users[i].Username == username {
 			foundUsername = users[i]
 		}
 	}
